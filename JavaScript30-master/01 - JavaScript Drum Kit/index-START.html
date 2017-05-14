@@ -58,7 +58,47 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+// window.addEventListener('keydown',function(e){
+//   // console.log(e);
+//   // e.keyCode
+//   var x = document.getElementsByClassName("key");
+//   var y = document.getElementsByTagName("audio");
+//   for (var i = 0; i <= x.length-1; i++) {
+//     let xel = x[i].getAttribute("data-key");
+//     let yel = y[i].getAttribute("data-key");
+//     if( xel == e.keyCode){
+//       x[i].classList.add("playing");
+//       // x[i].className= "key";
+//       // console.log(x[i].classList);
+//       // x[i].className = "key";
+//     }
+//     if( yel == e.keyCode){
+//       y[i].play();
+//     }
+//     x[i].classList.remove("playing");
+//   }
 
+// },false);
+// window.addEventListener('keyup',function(e){
+//   var x = document.getElementsByClassName("key");
+//   for (var i = 0; i <= x.length-1; i++) {
+//     x[i].classList.remove = "playing";
+//   }
+// },false);
+window.addEventListener('keydown',function(e){
+  const audio = document.querySelector(`audio[data-key= "${e.keyCode}"]`);
+  const key = document.querySelector(`div .key[data-key= "${e.keyCode}"]`);
+  // console.log(audio);
+  audio.currentTime = 0; //makes audio to play from start even it is playing (repeated clicks)
+  audio.play();
+  key.classList.add("playing"); //adding key press animation
+  // setTimeout(function(){     //removing key press animation
+  //   key.classList.remove("playing");
+  // },100);
+  key.addEventListener('transitionend',function(){ //fired after css transition (playing) ends
+    key.classList.remove("playing");
+  },false)
+},false)
 </script>
 
 
